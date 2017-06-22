@@ -1,71 +1,88 @@
 /* 
+ * My approach to Typed.JS library
+ * This JavaScript library type out all the given sentences, letter by letter.
+ * It look like someone is typing some text on the website.
  * Author: Piotr Wróblewski
  * Date: 22.06.2017
- * 
  */
-
-function MyTypedJS (selector, params) {
-    this.strings = params.strings;
-    this.cursorSpeed = 1;
-    this.textSpeed = params.speed;
-    this.initialDelay = params.initialDelay;
-    this.selector = selector;
-    this.container = null;
-    this.theEnd = false;
-    this.cursorChild = null;
-    this.textChild = null;
-}
-
-
-MyTypedJS.prototype.typeText = function() {
-    var self = this;
-    self.container = document.querySelector(this.selector);
+var MyTypedJS = {
+    /*
+     * 
+     * @type type
+     */
+    strings: null,
+    /*
+     * 
+     * @type Number
+     */
+    cursorSpeed: 1,
+    textSpeed: null,
+    initialDelay: null,
+    selector: null,
+    container: null,
+    /*
+     * 
+     * @type Boolean
+     */
+    theEnd: false,
+    cursorChild: null,
+    textChild: null,
     
-    self.textChild = document.createElement("span");
-    self.container.appendChild(self.textChild);
-    
-    self.cursorChild = document.createElement("span");
-    var textnode = document.createTextNode("|");
-    self.cursorChild.appendChild(textnode);  
-    self.container.appendChild(self.cursorChild);
-    self.cursorChild.className = 'typed-cursor';
-     
-    var n = 0;
-    var m = 0;
-    var skipped = 0;
-    var skip = false;
-    var x = 0;
-    
-    setTimeout(function() {
-        setInterval(function() {
-            
-            x++;
-            if (x > Math.floor(Math.random() * 5)) {
-                x = 0;
-                if (skip) skipped++;
-                if (skipped > 3) {
-                    skip = false;
-                    self.textChild.innerHTML += '<br>';
-                    skipped = 0;
-                }
-
-                if (!self.theEnd && !skip) {
-                    self.textChild.innerHTML += self.strings[n][m];
-                    m++;
-                    if (n >= self.strings.length-1 && m >= self.strings[n].length) {
-                        self.theEnd = true;
-                        //self.textChild.innerHTML += '<br><p>THE END.</p>';
-                        console.log('THE END');
-                    }
-                    if (m >= self.strings[n].length && !self.theEnd) {
-                        m = 0;
-                        skip = true;
-                        n++;
-                    }
-                }
-            }
-        }, 50);
+    /* This function will print all given sentences on the website
+     * @selector {String} 
+     * @params {Object} {strings: {Array of strings} Array of sentences, textSpeed {int} speed of text (1 - 10), initialDelay {int} initial delay, just before typing
+     */
+    typeText: function(selector, params) {
+        this.selector = selector;
+        this.container = document.querySelector(this.selector);
+        this.strings = params.strings;
+        this.textSpeed = params.textSpeed;
+        this.initialDelay = params.initialDelay;
+        if (this.textSpeed < 1 || this.textSpeed > 10) this.textSpeed = 5;
         
+        this.textChild = document.createElement("span");
+        this.container.appendChild(this.textChild);
+
+        this.cursorChild = document.createElement("span");
+        this.cursorChild.appendChild(document.createTextNode("|"));  
+        this.container.appendChild(this.cursorChild);
+        this.cursorChild.className = 'typed-cursor';
+        
+        var n = 0;
+        var m = 0;
+        var skipped = 0;
+        var skip = false;
+        var x = 0;
+        var self = this;
+        
+        setTimeout(function() {
+            var interval = setInterval(function() {
+                x++;
+                if (x + self.textSpeed > Math.floor(Math.random() * 5) + 10) {
+                    x = 0;
+                    if (skip) skipped++;
+                    if (skipped > 3) {
+                        skip = false;
+                        self.textChild.innerHTML += '<br>';
+                        skipped = 0;
+                    }
+                    if (!self.theEnd && !skip) {
+                        self.textChild.innerHTML += self.strings[n][m];
+                        m++;
+                        if (n >= self.strings.length-1 && m >= self.strings[n].length) {
+                            this.theEnd = true;
+                            //console.log('THE END');
+                            clearInterval(interval);
+                        }
+                        if (m >= self.strings[n].length && !self.theEnd) {
+                            m = 0;
+                            skip = true;
+                            n++;
+                        }
+                    }
+                }
+            }, 25);
+        }
+        , this.initialDelay);
     }
-    , self.initialDelay);
 };

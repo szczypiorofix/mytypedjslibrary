@@ -10,16 +10,17 @@ and open the template in the editor.
 
     @CHARSET "UTF-8";
 
-    @import url('https://fonts.googleapis.com/css?family=Coda');
+    @import url('https://fonts.googleapis.com/css?family=Special+Elite');
     html, body {
-        font-family: 'Coda', cursive;
+        font-family: 'Special Elite', cursive;
         font-size: 16px;
         box-sizing:border-box;
-        background-color: #332818;
-        color: #ee8866;;
+        background-color: #111111;
+        color: #ccc;
     }
     
     .mycontainer {
-        color: #ee9866;
+        color: #ccc;
+        line-height: 200%;
     }
     
