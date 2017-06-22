@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017-06-21, 16:40:54
+    Author     : Piotrek
+*/
+
+    @CHARSET "UTF-8";
+
+    @import url('https://fonts.googleapis.com/css?family=Coda');
+    html, body {
+        font-family: 'Coda', cursive;
+        font-size: 16px;
+        box-sizing:border-box;
+        background-color: #332818;
+        color: #ee8866;;
+    }
+    
+    .mycontainer {
+        color: #ee9866;
+    }
+    

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Wróblewski Piotr - my own Typed.JS library</title>
+        <meta charset="utf-8">
+        <META HTTP-EQUIV="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Wróblewski Piotr - my own Typed.JS library">
+        <meta name="author" content="Wróblewski Piotr">
+        <meta property="og:title" content="Wróblewski Piotr">
+        <meta property="og:image" content="https://wroblewskipiotr.pl/blackboard/icon.png">
+        <meta property="og:description" content="Wróblewski Piotr - my own Typed.JS library">
+        <link rel="icon" href="icon.png">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/typed.css">
+    </head>
+    <body>
+        <div>
+            <h3>Oto moja własna wersja biblioteki Typed.JS</h3>
+            <div class="mycontainer"></div>
+        </div>
+        
+        <script src="js/script.js"></script>
+        <script>
+            var s = new MyTypedJS('.mycontainer', {
+                strings: [
+                    "To jest pierwsze zdanie.",
+                    "To jest drugie zdanie.",
+                    "To już jest czecie zdanie.",
+                    "A to czwarte, trochę dłuższe zdanie.",
+                    "Ale zdanie piąte, jest naprawdę naprawdę długie, aż żal je kończyć, bo a nóż przyjdzie coś do głowy i zdanie to nigdy nie będzie mieć końca. Aż do teraz ... sadly..."],
+                speed: 100,
+                initialDelay : 400
+            });
+            s.typeText();
+        </script>
+    </body>
+</html>
