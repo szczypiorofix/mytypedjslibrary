@@ -58,15 +58,18 @@ var MyTypedJS = {
         setTimeout(function() {
             var interval = setInterval(function() {
                 x++;
-                if (x + self.textSpeed > Math.floor(Math.random() * 5) + 10) {
+                if (x + self.textSpeed > Math.floor(Math.random() * 5) + 7) {
                     x = 0;
                     if (skip) skipped++;
-                    if (skipped > 3) {
+                    if (skipped > 4) {
                         skip = false;
                         self.textChild.innerHTML += '<br>';
                         skipped = 0;
                     }
                     if (!self.theEnd && !skip) {
+                        if (self.strings[n][m] === ' ') {
+                            x -= 10;
+                        }
                         self.textChild.innerHTML += self.strings[n][m];
                         m++;
                         if (n >= self.strings.length-1 && m >= self.strings[n].length) {
